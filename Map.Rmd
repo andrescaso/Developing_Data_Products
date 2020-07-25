@@ -1,0 +1,48 @@
+---
+title: "Map_Project"
+author: "Andres Caso"
+date: "24-07-2020"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, cache=TRUE, warning=FALSE, message=FALSE)
+```
+
+## Top 5 Indian Restaurants in Santiago of Chile
+
+```{r leaf}
+library(leaflet)
+lat <- c(-33.395046840358496,-33.437323,-33.4022774,-33.4447278,-33.435995)
+lng <- c(-70.57904392524686,-70.6161347,-70.5984375,-70.6144854,-70.6494691)
+restlatlng <- data.frame(lat,lng)
+rest_site <- c("<a href='http://www.rishtedar.com/'>Rishtedar</a>",
+          "<a href='http://jewelofindia.cl/'>Jewel of India</a>",
+          "<a href='https://www.saffronchile.cl/'>Saffron Indian Delicacies</a>",
+          "<a href='https://theraj.cl/'>The Raj</a>",
+          "<a href='https://majestic.cl/'>Majestic</a>")
+rest_icon <- iconList(
+     ris_icon = makeIcon(                          
+          iconUrl = "https://static.wixstatic.com/media/585504_e9cdbca3471e4572aea51fe144fbeb9e~mv2.gif", 
+          iconWidth = 31*215/230, iconHeight = 31, 
+          iconAnchorX = 31*215/230/2, iconAnchorY = 16),
+     jew_icon = makeIcon(
+          iconUrl = "http://jewelofindia.cl/wp-content/uploads/2019/12/56952759_1704064029738486_9184562991540994048_o.png", 
+          iconWidth = 31*215/230, iconHeight = 31, 
+          iconAnchorX = 31*215/230/2, iconAnchorY = 16),
+     saf_icon = makeIcon(
+          iconUrl = "https://tofuu.getjusto.com/orioneat-prod-resized/9xutDfrB3Gc9trrdK-200-undefined.webp", 
+          iconWidth = 31*215/230, iconHeight = 31, 
+          iconAnchorX = 31*215/230/2, iconAnchorY = 16),
+     raj_icon = makeIcon(
+          iconUrl = "https://theraj.cl/wp-content/uploads/2016/09/logo-therag-big.png",
+          iconWidth = 31*215/230, iconHeight = 31, 
+          iconAnchorX = 31*215/230/2, iconAnchorY = 16),
+     maj_icon = makeIcon(
+          iconUrl = "https://www.facebook.com/1498613787052702/photos/2183010801946327/", 
+          iconWidth = 31*215/230, iconHeight = 31, 
+          iconAnchorX = 31*215/230/2, iconAnchorY = 16))
+map <- restlatlng %>% leaflet() %>% addTiles() %>% addMarkers(popup=rest_site,icon = rest_icon,clusterOptions = markerClusterOptions())
+map
+```
+
