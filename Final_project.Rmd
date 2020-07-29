@@ -1,0 +1,59 @@
+---
+title: "Final Project"
+author: "Andres Caso"
+date: "28-07-2020"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(ggplot2)
+```
+
+## Shiny App
+
+This shiny app use the ChickWeight datasets to predict the weight of chicks based in the age and type of diet
+
+The dataset have 4 variables:
+     - weight: a numeric vector giving the body weight of the chick (gm).
+
+     - Time: a numeric vector giving the number of days since birth when the 
+     measurement was made.
+
+     - Chick: an ordered factor with levels 18 < ... < 48 giving a unique 
+     identifier for the chick. The ordering of the levels groups chicks on 
+     the same diet together and orders them according to their final weight 
+     (lightest to heaviest) within diet.
+
+     - Diet: a factor with levels 1, ..., 4 indicating which experimental 
+     diet the chick received.
+
+
+## Shiny App
+
+### Side Bar
+
+In the side bar you can selected the days and type of diet of a chick
+
+Type of diet: you have 4 options (1, 2, 3 and 4)
+
+Age: You can select between 1 to 25 days of life
+
+```{r sum}
+summary(ChickWeight)
+```
+
+---
+
+### Main Panel
+
+In the main panel you can look 3 values
+
+- the age and type of diet of the chick you selected in the side bar. 
+- a graphic of the weights and age separated for the type of diet and a point with the predicted weight
+- Value of predicted weight
+
+```{r plot, fig.width=8, fig.height=3}
+ggplot(data = ChickWeight, aes(Time, weight)) + geom_line(aes(color=Diet))
+```
+
